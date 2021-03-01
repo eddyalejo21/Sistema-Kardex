@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+<h:head>
+	<h:outputStylesheet library="css" name="bootstrap.min.css" />
+	<h:outputStylesheet library="css" name="style.css" />
+	<h:outputStylesheet library="css" name="styleLogin.css" />
+	<h:outputStylesheet library="css" name="sb-admin-2.css" />
+	
+	
+</h:head>
+<body class="bg-gradient-primary">
+	<div class="container-fluid">
+		<h:form>
+			<p:growl id="mensaje" showDetail="true" />
+			<div class="row">
+				<div class="col-md-12">
+					<div class="contenedorLogin row">
+						
+
+						<div class="col-md-12" align="center">
+							<p style="font-weight: bolder; font-size: large;">SISTEMA DE CONTROL DE INVENTARIOS</p>
+								
+							<h:panelGrid columns="1" cellpadding="1px">
+							
+							<p:outputLabel for="txtUsuario" value="Usuario:" style="font-size:large"/>
+							<p:inputText id="txtUsuario" maxlength="25"
+								styleClass="form-control rounded-pill" style="text-transform:uppercase;width:300px;text-align:center;font-size:15px"
+								required="false" requiredMessage="Ingrese el usuario"
+								value="#{iniciarSesionController.usuario.usUsuario}" />
+							
+							<p:outputLabel for="txtPassword" value="Contraseña:" style="font-size:large"/>
+							<p:password id="txtPassword" maxlength="15"
+								styleClass="form-control rounded-pill" style="text-transform:uppercase;width:300px;text-align:center"
+								required="true" requiredMessage="Ingrese la contraseña"
+								value="#{iniciarSesionController.usuario.usclave}" />
+							<br />
+
+							<p:commandButton styleClass="bg-warning border-warning form-control rounded-pill"
+								value="Ingresar"
+								action="#{iniciarSesionController.iniciarSesion()}"
+								update="mensaje" process="@this txtUsuario txtPassword" ajax="false"/>
+							<br />
+							
+							</h:panelGrid>
+
+						</div>
+
+					</div>
+				</div>
+
+			</div>
+		</h:form>
+	</div>
+</body>
+</html>
+

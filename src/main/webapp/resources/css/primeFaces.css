@@ -1,0 +1,310 @@
+.ui-widget {
+	font-family: Lucida Grande, Lucida Sans, Arial, sans-serif;
+	font-size: 0.8em;
+}
+
+.wijmo-wijmenu .wijmo-wijmenu-parent .wijmo-wijmenu-child {
+	display: table-row;
+	padding: 0.3em;
+	width: 300px;
+	line-height: 14px;
+}
+/*.ui-panel
+{
+  background-color: transparent;  
+}*/
+
+/*.ui-paginator-top{
+    background-image: url("/SeleccionPersonalWeb/javax.faces.resource/images/");
+    background-color: white;
+    border: 0px solid white;
+}
+
+.ui-paginator-bottom{
+    background-image: url("/SeleccionPersonalWeb/javax.faces.resource/images/");
+    background-color: white;
+    border: 0px solid white;
+}*/
+.wijmo-wijmenu {
+	border: 0px solid white;
+	background: url(images/pixelGris3.png) repeat;
+	padding: 0.1em;
+	position: absolute;
+	width: 998px;
+	height: 28px;
+	top: 72px;
+}
+
+/* theme arbol */
+.nodeContent {
+	margin-left: 20px;
+}
+
+.documentStyle {
+	background: url(images/folders/doc.png) no-repeat;
+	padding-left: 20px;
+}
+
+.ygtvtn {
+	background: url(images/folders/tn.gif) 0 0 no-repeat;
+	width: 17px;
+	height: 22px;
+}
+
+.ygtvtm {
+	background: url(images/folders/tm.gif) 0 0 no-repeat;
+	width: 34px;
+	height: 22px;
+	cursor: pointer
+}
+
+.ygtvtmh {
+	background: url(images/folders/tmh.gif) 0 0 no-repeat;
+	width: 34px;
+	height: 22px;
+	cursor: pointer
+}
+
+.ygtvtp {
+	background: url(images/folders/tp.gif) 0 0 no-repeat;
+	width: 34px;
+	height: 22px;
+	cursor: pointer
+}
+
+.ygtvtph {
+	background: url(images/folders/tph.gif) 0 0 no-repeat;
+	width: 34px;
+	height: 22px;
+	cursor: pointer
+}
+
+.ygtvln {
+	background: url(images/folders/ln.gif) 0 0 no-repeat;
+	width: 17px;
+	height: 22px;
+}
+
+.ygtvlm {
+	background: url(images/folders/lm.gif) 0 0 no-repeat;
+	width: 34px;
+	height: 22px;
+	cursor: pointer
+}
+
+.ygtvlmh {
+	background: url(images/folders/lmh.gif) 0 0 no-repeat;
+	width: 34px;
+	height: 22px;
+	cursor: pointer
+}
+
+.ygtvlp {
+	background: url(images/folders/lp.gif) 0 0 no-repeat;
+	width: 34px;
+	height: 22px;
+	cursor: pointer
+}
+
+.ygtvlph {
+	background: url(images/folders/lph.gif) 0 0 no-repeat;
+	width: 34px;
+	height: 22px;
+	cursor: pointer
+}
+
+.panelgrid-sin-bordes td, .panelgrid-sin-bordes tr {
+	border-width: 0;
+}
+
+/*.ui-growl {   
+    position:fixed;
+    left: 37%;
+    width: 500px;
+    top: 10% !important;
+    height: 110px;
+    z-index:9999;     
+
+}
+
+
+
+.ui-growl-item{
+    background-color:#6E6E6E ;
+
+}
+
+.ui-growl-item-container
+{    
+    border-color: #2E2E2E;
+    position:fixed;
+    width: 500px;
+    background-color: #848484;
+    opacity:200;
+}
+
+.ui-growl-title {
+        font-weight:bold;
+        font-size: 13px;
+        padding:0 0 7px 0;
+        display:block;
+        color: white;
+        text-shadow: 0.1em 0.3em 0.2em black;
+}*/
+.cloudDwnl {
+	background-image:
+		url("#{facesContext.externalContext.request.contextPath}/resources/images/botones/cloud-download32.png")
+		!important;
+	background-color: transparent !important;
+	width: 32px;
+	height: 32px;
+	background-size: contain;
+	border: 0 !important;
+}
+
+.cloudDwnl:hover {
+	transform: scale(1.1);
+}
+
+.bump {
+	border: 2px solid #3498db;
+	float: left;
+	/*-webkit_transition: margin 0.5s ease-out;
+	-moz_transition: margin 0.5s ease-out;
+	-o-transition: margin 0.5s ease-out;*/
+	color: #2980b9;
+	font-weight: bold";
+}
+
+.bump:hover {
+	border: 2px solid #e67e22;
+	-webkit_tranform: scale(1.3);
+	-moz_transform: scale(1.3);
+	-o-transform: scale(1.3);
+	-ms-transform: scale(1.3);
+	transform: scale(1.3);
+}
+
+.negrita {
+	font-weight: bold;
+}
+
+.noDisp {
+	background: red;
+	color: white;
+}
+
+.deleteBtn {
+	background-image:
+		url("#{facesContext.externalContext.request.contextPath}/resources/images/botones/delete16.png")
+		!important;
+	background-color: transparent !important;
+	width: 16px;
+	height: 16px;
+	background-size: contain;
+	border: 0 !important;
+}
+
+.deleteBtn:hover {
+	transform: scale(1.3);
+}
+
+.backBtn {
+	background-image:
+		url("#{facesContext.externalContext.request.contextPath}/resources/images/botones/atras.png")
+		!important;
+	background-color: transparent !important;
+	width: 48px;
+	height: 48px;
+	float: left;
+	background-size: contain;
+	border: 0 !important;
+}
+
+.backBtn:hover {
+	transform: translate(-10px);
+}
+
+.addBtn {
+	background-image:
+		url("#{facesContext.externalContext.request.contextPath}/resources/images/botones/add.png")
+		!important;
+	background-color: transparent !important;
+	width: 32px;
+	height: 32px;
+	background-size: contain;
+	border: 0 !important;
+}
+
+.OKBtn {
+	background-image:
+		url("#{facesContext.externalContext.request.contextPath}/resources/images/botones/save.png")
+		!important;
+	background-color: transparent !important;
+	width: 32px;
+	height: 32px;
+	background-size: contain;
+	border: 0 !important;
+}
+
+.cancelBtn {
+	background-image:
+		url("#{facesContext.externalContext.request.contextPath}/resources/images/botones/cancel.png")
+		!important;
+	background-color: transparent !important;
+	width: 32px;
+	height: 32px;
+	background-size: contain;
+	border: 0 !important;
+}
+
+/*
+.ui-panelgrid td {
+	background-color: #f6e58d !important;
+	width: 950px;
+	color: #f0932b;
+	font-size: 16px;
+	border: 0 !important;
+	font-style: italic;
+}
+*/
+
+.registrarBtn {
+	background-image:
+		url("#{facesContext.externalContext.request.contextPath}/resources/images/botones/cursos.png")
+		!important;
+	background-color: transparent !important;
+	width: 40px;
+	height: 40px;
+	float: left;
+	background-size: contain;
+	border: 0 !important;
+}
+
+.archivoElim {
+	background-image:
+		url("#{facesContext.externalContext.request.contextPath}/resources/images/botones/eliminar.png")
+		!important;
+	background-color: transparent !important;
+	width: 24px;
+	height: 24px;
+	float: left;
+	background-size: contain;
+	border: 0 !important;
+}
+
+.modificaBtn {
+	background-image:
+		url("#{facesContext.externalContext.request.contextPath}/resources/images/botones/modifica.png")
+		!important;
+	background-color: transparent !important;
+	width: 24px;
+	height: 24px;
+	float: left;
+	background-size: contain;
+	border: 0 !important;
+}
+
+.boton{
+	border-radius: 25px;
+}

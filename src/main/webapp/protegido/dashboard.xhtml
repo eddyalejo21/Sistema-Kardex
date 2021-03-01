@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
+<ui:composition template="/master.xhtml">
+	<ui:define name="content">
+		<h:form id="panelGeneral">
+			<div
+				class="d-sm-flex align-items-center justify-content-between mb-4">
+				<h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+			</div>
+
+			<div class="row">
+
+				<!-- Earnings (Monthly) Card Example -->
+				<div class="col-xl-4 col-md-6 mb-4">
+					<div class="card border-left-primary shadow h-100 py-2 bg-gradient-primary">
+						<div class="card-body">
+							<div class="row no-gutters align-items-center">
+								<div class="col mr-2">
+									<div
+										class="text-lg font-weight-bold text-light text-uppercase mb-1">Usuarios</div>
+									<div class="h5 mb-0 font-weight-bold text-white-800"><span style="color:white">Tiene registrados #{fn:length(administrarUsuarioControlador.listarUsuario)} </span></div>
+								</div>
+								<div class="col-auto">
+									<i class="fa fa-users fa-2x text-gray-300"></i>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Earnings (Monthly) Card Example -->
+				<div class="col-xl-4 col-md-6 mb-4">
+					<div class="card border-left-success shadow h-100 py-2 bg-gradient-success">
+						<div class="card-body">
+							<div class="row no-gutters align-items-center">
+								<div class="col mr-2">
+									<div
+										class="text-lg font-weight-bold text-light text-uppercase mb-1">Productos
+										en Inventario</div>
+									<div class="h5 mb-0 font-weight-bold text-white-800"><span style="color:white">Tiene registrados #{fn:length(administrarProductoControlador.listarProducto)} </span></div>
+								</div>
+								<div class="col-auto">
+									<i class="fa fa-suitcase fa-2x text-gray-300"></i>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Pending Requests Card Example -->
+				<div class="col-xl-4 col-md-6 mb-4">
+					<div class="card border-left-warning shadow h-100 py-2 bg-gradient-warning">
+						<div class="card-body">
+							<div class="row no-gutters align-items-center">
+								<div class="col mr-2">
+									<div
+										class="text-lg font-weight-bold text-light text-uppercase mb-1">Categorias</div>
+									<div class="h5 mb-0 font-weight-bold text-white-800"><span style="color:white">Tiene registrados #{fn:length(administrarCategoriaControlador.listarCategoria)}</span></div>
+								</div>
+								<div class="col-auto">
+									<i class="fa fa-list-alt fa-2x text-gray-300"></i>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<!-- Tablas de datos -->
+			<div class="form-row mb-3">
+
+				<div class="col-12 col-md-4">
+					<p:panel id="pnlTop" header="Productos más vendidos">
+						<p:dataTable id="tblTop">
+							<p:column headerText="Producto">
+								<h:outputLabel value="" />
+							</p:column>
+							<p:column headerText="Total" width="70">
+								<h:outputLabel value="" />
+							</p:column>
+						</p:dataTable>
+					</p:panel>
+				</div>
+
+				<div class="col-12 col-md-4">
+					<p:panel id="pnlLast" header="Últimas ventas">
+						<p:dataTable id="tblVendidos">
+							<p:column headerText="Producto">
+								<h:outputLabel value="" />
+							</p:column>
+							<p:column headerText="Total" width="70">
+								<h:outputLabel value="" />
+							</p:column>
+						</p:dataTable>
+					</p:panel>
+				</div>
+
+				<div class="col-12 col-md-4">
+					<p:panel id="pnlAdd" header="Productos agregados recientemente">
+						<p:dataTable id="tblAgregados">
+							<p:column headerText="Producto">
+								<h:outputLabel value="" width="70"/>
+							</p:column>
+							<p:column headerText="Total">
+								<h:outputLabel value="" />
+							</p:column>
+						</p:dataTable>
+					</p:panel>
+				</div>
+
+			</div>
+
+
+
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

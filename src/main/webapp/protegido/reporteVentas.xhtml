@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/master.xhtml">
+	<ui:define name="content">
+		<h:form id="panelGeneral">
+			<div
+				class="d-sm-flex align-items-center justify-content-between mb-4">
+				<h1 class="h3 mb-0 text-gray-800">Reporte de ventas</h1>
+			</div>
+
+			<p:growl id="mensaje" closable="true" showDetail="true"
+				showSummary="true" />
+
+			<div class="row">
+				<div class="col-12">
+					<p:panel id="pnlDatos" header="Punto de venta">
+						<div class="ui-fluid">
+							<div class="p-field p-grid">
+								<p:outputLabel for="txtFecha" value="Seleccionar Fecha"
+									styleClass="p-col-12 p-md-1" />
+								<div class="p-col-12 p-md-2">
+									<p:calendar id="txtFecha"
+										value="#{administrarConsultaVentas.fechaConsulta}"
+										pattern="yyyy-MM-dd">
+									</p:calendar>
+								</div>
+								<div class="p-col-12 p-md-2">
+									<p:commandButton value="Buscar"
+										styleClass="form-control bg-gradient-primary border-primary rounded-pill"
+										actionListener="#{administrarConsultaVentas.buscarVentaPorFecha()}"
+										icon="fa fa-search" process="@this txtFecha"
+										update="panelGeneral tblConsulta" />
+								</div>
+							</div>
+						</div>
+
+						<p:dataTable id="tblConsulta" var="consulta"
+							value="#{administrarConsultaVentas.listarDetalleVenta}" style="text-align:center;font-size:11px">
+							<p:column headerText="Fecha">
+								<h:outputLabel value="#{consulta.venta.veFecha}">
+									<f:convertDateTime pattern="yyyy-MM-dd HH:mm" timeZone="GMT-5"/>
+								</h:outputLabel>
+							</p:column>
+
+							<p:column headerText="Usuario">
+								<h:outputLabel value="#{consulta.venta.usuario.usNombre}" />
+							</p:column>
+
+							<p:column headerText="Producto">
+								<h:outputLabel value="#{consulta.detProducto}" />
+							</p:column>
+
+							<p:column headerText="Cantidad">
+								<h:outputLabel value="#{consulta.detCantidad}" />
+							</p:column>
+
+							<p:column headerText="Valor Unitario">
+								<h:outputLabel value="#{consulta.detValorUnitario}" />
+							</p:column>
+
+							<p:column headerText="Total">
+								<h:outputLabel value="#{consulta.detTotal}" />
+							</p:column>
+
+							<p:columnGroup type="footer">
+								<p:row>
+									<p:column colspan="5" style="text-align:right; font-size:large">
+										<f:facet name="footer">
+											<h:outputText value="Total:" style="font-size:large" />
+										</f:facet>
+									</p:column>
+
+									<p:column style="text-align:center; font-weigth:bold;color:red">
+										<f:facet name="footer">
+											<p:outputLabel
+												value="#{administrarConsultaVentas.sumaTotal}"
+												style="font-size:large;" />
+										</f:facet>
+									</p:column>
+								</p:row>
+							</p:columnGroup>
+
+						</p:dataTable>
+
+					</p:panel>
+				</div>
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

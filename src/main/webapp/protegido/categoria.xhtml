@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/master.xhtml">
+	<ui:define name="content">
+		<h:form id="panelGeneral">
+			<div
+				class="d-sm-flex align-items-center justify-content-between mb-4">
+				<h1 class="h3 mb-0 text-gray-800">Categorias</h1>
+			</div>
+			
+			<p:growl id="mensaje" closable="true" showDetail="true" showSummary="true"/>
+
+			<div class="form-row mb-3">
+				<div class="col-12 col-md-4">
+					<p:panel id="pnlNuevo" header="Agregar nueva categoria">
+						<div class="ui-fluid p-formgrid p-grid">
+							<div class="p-field p-col-12 p-md-12">
+								<p:outputLabel for="txtCategoria" value="Nombre Categoria:" />
+								<p:inputText id="txtCategoria" styleClass="badge-pill"
+									disabled="#{administrarCategoriaControlador.deshabilitar}"
+									value="#{administrarCategoriaControlador.categoria.catNombre}" />
+							</div>
+							<p:commandButton styleClass="mt-2 bg-primary border-primary"
+								value="Guardar"
+								actionListener="#{administrarCategoriaControlador.guardarCategoria()}"
+								update="tblCategoria txtCategoria mensaje" process="@this txtCategoria" />
+
+						</div>
+					</p:panel>
+				</div>
+
+				<div class="col-12 col-md-8">
+					<p:panel id="pnlCategoria" header="Categorias">
+						<p:dataTable id="tblCategoria" var="categoria"
+							value="#{administrarCategoriaControlador.listarCategoria}"
+							style="font-size:11px;text-align:center;"
+							selection="#{administrarCategoriaControlador.categoriaSeleccion}"
+							selectionMode="single" rowKey="#{categoria.idCategoria}"
+							paginator="true" rows="10" resizableColumns="true"
+							resizeMode="expand"
+							paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+							rowsPerPageTemplate="10,20,50"
+							currentPageReportTemplate="{totalRecords} en lista">
+
+							<p:ajax event="rowSelect" update="tblCategoria" process="@this"
+								listener="#{administrarCategoriaControlador.seleccionarCategoria()}" />
+
+							<p:column headerText="Id" width="80" ariaHeaderText="bold">
+								<h:outputLabel value="#{categoria.idCategoria}" />
+							</p:column>
+
+							<p:column headerText="Categoria">
+								<h:outputLabel value="#{categoria.catNombre}" />
+							</p:column>
+
+							<f:facet name="footer">
+								<div align="left">
+									<p:commandButton process="tblCategoria" update="@form"
+										icon="fa fa-edit" value="Modificar"
+										oncomplete="PF('wdlgCategoria').show()"
+										styleClass="bg-info border-info" />
+
+									<p:commandButton process="tblCategoria" update="panelGeneral"
+										icon="fa fa-trash" value="Eliminar"
+										actionListener="#{administrarCategoriaControlador.eliminarCategoria()}"
+										styleClass="bg-warning border-warning" />
+								</div>
+							</f:facet>
+
+						</p:dataTable>
+					</p:panel>
+				</div>
+
+				<p:dialog id="dlgCategoria" header="Modificar Categoria"
+					widgetVar="wdlgCategoria" modal="true" resizable="false"
+					draggable="false">
+					<p:panel>
+						<div class="ui-fluid p-formgrid p-grid">
+							<div class="p-field p-col-12 p-md-12">
+								<p:outputLabel for="txtCategoria2" value="Nombre Categoria:" />
+								<p:inputText id="txtCategoria2"
+									value="#{administrarCategoriaControlador.categoria.catNombre}" />
+							</div>
+						</div>
+
+						<div align="center">
+							<p:commandButton styleClass="mt-2 bg-primary border-primary"
+								value="Guardar"
+								actionListener="#{administrarCategoriaControlador.modificarCategoria()}"
+								update="tblCategoria txtCategoria mensaje" process="@this txtCategoria2"
+								oncomplete="if (args &amp;&amp; !args.validationFailed) PF('wdlgCategoria').hide()" />
+
+							<p:commandButton styleClass="mt-2 bg-primary border-primary"
+								value="Salir"
+								actionListener="#{administrarCategoriaControlador.nuevo()}"
+								update="tblCategoria txtCategoria mensaje" process="@this txtCategoria2"
+								oncomplete="if (args &amp;&amp; !args.validationFailed) PF('wdlgCategoria').hide()" />
+						</div>
+
+					</p:panel>
+
+				</p:dialog>
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

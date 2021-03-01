@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<h:outputStylesheet library="css" name="bootstrap.min.css" />
+	<h:outputStylesheet library="css" name="main.css" />
+	<h:outputStylesheet library="css" name="util.css" />
+</h:head>
+<body>
+
+	<div class="limiter">
+		<p:growl id="mensaje" showDetail="true" showSummary="true"/>
+		<div class="container-login100">
+
+			<div class="wrap-login100">
+
+				<form class="login100-form validate-form">
+					<div align="center">
+						<p:graphicImage value="/resources/images/logoQuito.png"
+							styleClass="img-fluid imagen"
+							style="margin-bottom:auto;width:450px;height:250px;" />
+					</div>
+
+					<h:form>
+
+						<div class="wrap-input100 validate-input border-0">
+							<h:outputLabel for="txtUsuario" value="Usuario:"
+								style="font-size:large;padding-left:20px" />
+							<p:inputText placeholder="Usuario" id="txtUsuario"
+								styleClass="form-control rounded-pill border-primary input-group"
+								style="text-transform:uppercase;padding-left:20px"
+								required="false" requiredMessage="Ingrese el usuario"
+								value="#{inicioSesionControlador.usuario.usuario}" />
+
+						</div>
+
+
+						<div class="wrap-input100 validate-input border-0">
+							<p:outputLabel for="txtPassword" value="Contraseña:"
+								style="font-size:large;padding-left:20px" />
+							<p:password placeholder="Contraseña" id="txtPassword"
+								styleClass="form-control rounded-pill border-primary"
+								style="text-transform:uppercase;padding-left:20px"
+								required="true" requiredMessage="Ingrese la contraseña"
+								value="#{inicioSesionControlador.usuario.clave}" />
+						</div>
+
+						<div class="container-login100-form-btn">
+							<p:commandButton
+								styleClass="bg-warning border-warning rounded-pill form-control"
+								value="Ingresar"
+								style="font-size:large;font-weight:bold;height:50px"
+								action="#{inicioSesionControlador.iniciarSesion()}"
+								update="mensaje" process="@this txtUsuario txtPassword"
+								ajax="false" />
+						</div>
+
+						<div align="center" style="margin-top: 70px">
+							<p:graphicImage value="/resources/images/logo.png"
+								styleClass="img-fluid imagen"
+								style="margin-bottom:auto;" />
+						</div>
+					</h:form>
+
+
+
+				</form>
+
+				<div class="login100-more"
+					style="background-image: url('../resources/images/panecillo.jpg');"></div>
+			</div>
+
+		</div>
+
+	</div>
+</body>
+</html>

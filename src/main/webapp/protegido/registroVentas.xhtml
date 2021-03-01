@@ -1,0 +1,169 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/master.xhtml">
+	<ui:define name="content">
+		<h:form id="panelGeneral">
+			<div
+				class="d-sm-flex align-items-center justify-content-between mb-4">
+				<h1 class="h3 mb-0 text-gray-800">Ventas</h1>
+			</div>
+
+			<p:growl id="mensaje" closable="true" showDetail="true"
+				showSummary="true" />
+
+			<div class="row">
+				<div class="col-12">
+					<p:panel id="pnlDatos" header="Punto de venta">
+						<div class="ui-fluid">
+							<div class="p-field p-grid">
+								<p:outputLabel for="txtCodigo" value="Ingrese código"
+									styleClass="p-col-12 p-md-1" />
+								<div class="p-col-12 p-md-2">
+									<p:inputText id="txtCodigo"
+										value="#{administrarVentaControlador.producto.prodBarcode}">
+										<p:keyFilter for="txtCodigo" mask="num" />
+									</p:inputText>
+								</div>
+								<div class="p-col-12 p-md-2">
+									<p:commandButton value="Buscar"
+										styleClass="form-control bg-gradient-primary border-primary rounded-pill"
+										actionListener="#{administrarVentaControlador.cargarProductoById()}"
+										update="txtProducto txtPrecio txtCantidad txtTotal mensaje"
+										process="@this txtCodigo" icon="fa fa-search" />
+								</div>
+							</div>
+						</div>
+
+						<p:separator />
+
+						<div class="form-row">
+							<div class="form-group col-md-3">
+								<p:outputLabel value="Producto" for="txtProducto" />
+								<p:inputText id="txtProducto"
+									style="height:30px;text-align:center" styleClass="form-control"
+									readonly="true"
+									value="#{administrarVentaControlador.producto.prodDescripcion}">
+								</p:inputText>
+							</div>
+
+							<div class="form-group col-md-2">
+								<p:outputLabel value="Precio" for="txtPrecio" />
+								<p:inputText id="txtPrecio"
+									style="height:30px;text-align:center" styleClass="form-control"
+									maxlength="30" readonly="true"
+									value="#{administrarVentaControlador.producto.prodPrecio}" />
+							</div>
+
+							<div class="form-group col-md-2">
+								<p:outputLabel value="Cantidad" for="txtCantidad" />
+								<p:inputText id="txtCantidad"
+									style="height:30px;text-align:center" styleClass="form-control"
+									maxlength="30" value="#{administrarVentaControlador.cantidad}">
+
+									<p:ajax event="keyup" update="txtTotal" process="@this"
+										listener="#{administrarVentaControlador.calcularTotalDetalle()}" />
+								</p:inputText>
+							</div>
+
+							<div class="form-group col-md-2">
+								<p:outputLabel value="Total" for="txtTotal" />
+								<p:inputNumber id="txtTotal" style="height:30px;text-align:center;background:white"
+									styleClass="form-control input-group" readonly="true"
+									value="#{administrarVentaControlador.totalVenta}"
+									decimalPlaces="2">
+								</p:inputNumber>
+							</div>
+
+							<div class="form-group col-md-1">
+								<p:outputLabel value="a" for="btnProcesar" style="color:white" />
+								<p:commandButton id="btnProcesar" style="height:30px"
+									icon="fa fa-check" value="Procesar"
+									styleClass="form-control bg-gradient-primary border-primary rounded-pill"
+									actionListener="#{administrarVentaControlador.agregarProducto()}"
+									update="tblVenta pnlDatos"
+									process="@this txtProducto txtCantidad txtPrecio txtTotal" />
+							</div>
+
+							<div class="form-group col-md-1">
+								<p:outputLabel value="a" for="btnCancelar" style="color:white" />
+								<p:commandButton id="btnCancelar" style="height:30px"
+									icon="fa fa-close"
+									styleClass="form-control bg-gradient-warning border-warning rounded-pill"
+									value="Cancelar" />
+							</div>
+						</div>
+					</p:panel>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-12">
+					<p:panel header="Detalle de venta">
+						<p:dataTable id="tblVenta" var="detalle"
+							value="#{administrarVentaControlador.listarDetalleVenta}"
+							style="font-size:11px;text-align:center;">
+							<p:column headerText="Descripción">
+								<h:outputLabel value="#{detalle.detProducto}" />
+							</p:column>
+
+							<p:column headerText="Cantidad">
+								<h:outputLabel value="#{detalle.detCantidad}" />
+							</p:column>
+
+							<p:column headerText="Precio">
+								<h:outputLabel value="#{detalle.detValorUnitario}">
+									<f:convertNumber type="currency" maxFractionDigits="2"
+										minFractionDigits="2" />
+								</h:outputLabel>
+							</p:column>
+
+							<p:column headerText="Total">
+								<h:outputLabel value="#{detalle.detTotal}" />
+							</p:column>
+
+							<p:columnGroup type="footer">
+								<p:row>
+
+									<p:column colspan="3" style="text-align:right; font-size:large">
+										<f:facet name="footer">
+											<h:outputText value="Total:" style="font-size:x-large" />
+										</f:facet>
+									</p:column>
+
+									<p:column style="text-align:center; font-weigth:bold;color:red">
+										<f:facet name="footer">
+											<p:outputLabel
+												value="#{administrarVentaControlador.totalFactura}"
+												style="font-size:x-large;" />
+										</f:facet>
+									</p:column>
+
+
+								</p:row>
+							</p:columnGroup>
+						</p:dataTable>
+
+						<div align="center">
+							<div class="p-col-12 p-md-2">
+								<p:commandButton value="Grabar Venta"
+									styleClass="form-control bg-gradient-primary border-primary rounded-pill"
+									actionListener="#{administrarVentaControlador.guardarFactura()}"
+									update="panelGeneral" process="@this tblVenta"
+									icon="fa fa-save" />
+							</div>
+						</div>
+					</p:panel>
+				</div>
+			</div>
+
+
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

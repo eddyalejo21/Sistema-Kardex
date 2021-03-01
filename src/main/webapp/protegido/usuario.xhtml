@@ -1,0 +1,257 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/master.xhtml">
+	<ui:define name="content">
+		<h:form id="panelGeneral">
+			<div
+				class="d-sm-flex align-items-center justify-content-between mb-4">
+				<h1 class="h3 mb-0 text-gray-800">Usuarios</h1>
+			</div>
+
+			<p:growl id="mensaje" closable="true" showDetail="true"
+				showSummary="true" />
+
+			<div class="form-row mb-3">
+				<div class="col-12 col-md-4">
+					<p:panel id="pnlNuevo" header="Registrar usuario">
+
+						<div class="form-row">
+							<div class=" form-group col-md-12">
+								<p:outputLabel value="Nombres" for="txtNombre" />
+								<p:inputText id="txtNombre" styleClass="form-control"
+									style="height:25px"
+									value="#{administrarUsuarioControlador.nombre}" maxlength="100"
+									required="true" requiredMessage="Ingrese nombre" />
+							</div>
+						</div>
+
+						<div class="form-row">
+							<div class=" form-group col-md-12">
+								<p:outputLabel value="Apellidos" for="txtApellido" />
+								<p:inputText id="txtApellido" styleClass="form-control"
+									style="height:25px"
+									value="#{administrarUsuarioControlador.apellido}"
+									maxlength="100" required="true"
+									requiredMessage="Ingrese apellido" />
+							</div>
+						</div>
+
+						<div class="form-row">
+							<div class=" form-group col-md-12">
+								<p:outputLabel value="Identificación" for="txtIdentificacion" />
+								<p:inputText id="txtIdentificacion" styleClass="form-control"
+									style="height:25px"
+									value="#{administrarUsuarioControlador.usuario.usIdentificacion}"
+									maxlength="100" required="true"
+									requiredMessage="Ingrese identificación" />
+							</div>
+						</div>
+
+						<div class="form-row">
+							<div class=" form-group col-md-12">
+								<p:outputLabel value="Usuario" for="txtUsuario" />
+								<p:inputText id="txtUsuario" styleClass="form-control"
+									style="height:25px"
+									value="#{administrarUsuarioControlador.usuario.usUsuario}"
+									maxlength="100" required="true"
+									requiredMessage="Ingrese usuario" />
+							</div>
+						</div>
+
+						<div class="form-row">
+							<div class=" form-group col-md-12">
+								<p:outputLabel value="Contraseña" for="txtContrasenia" />
+								<p:password id="txtContrasenia" styleClass="form-control"
+									style="height:25px" match="txtMatch"
+									validatorMessage="Contraseñas no coinciden"
+									value="#{administrarUsuarioControlador.usuario.usclave}"
+									maxlength="100" required="true"
+									requiredMessage="Ingrese contraseña" />
+							</div>
+						</div>
+
+						<div class="form-row">
+							<div class=" form-group col-md-12">
+								<p:outputLabel value="Repita Contraseña" for="txtMatch" />
+								<p:password id="txtMatch" styleClass="form-control"
+									style="height:25px"
+									value="#{administrarUsuarioControlador.usuario.usclave}"
+									maxlength="100" required="true"
+									requiredMessage="Repita Contraseña" />
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-12">
+								<p:outputLabel value="Rol de usuario" for="txtRol" />
+							</div>
+
+							<div class="col-12">
+								<p:selectOneMenu id="txtRol"
+									value="#{administrarUsuarioControlador.usuario.usRol}"
+									required="true" style="width:200px"
+									requiredMessage="Seleccione rol de usuario">
+									<f:selectItem itemLabel="Selecionar rol" />
+									<f:selectItems
+										value="#{administrarUsuarioControlador.listarRoles}" var="rol"
+										itemLabel="#{rol.label}" itemValue="#{rol.value}" />
+								</p:selectOneMenu>
+							</div>
+						</div>
+
+						<div align="center" class="mt-3 row">
+							<div class="col-12 col-md-6">
+								<p:commandButton value="Guardar"
+									actionListener="#{administrarUsuarioControlador.guardarUsuario()}"
+									update="panelGeneral tblUsuario mensaje"
+									oncomplete="if (args &amp;&amp; !args.validationFailed)"
+									process="@this txtNombre txtApellido txtIdentificacion txtUsuario txtContrasenia txtMatch txtRol"
+									styleClass="form-control bg-gradient-primary border-primary rounded-pill"
+									icon="fa fa-save" />
+							</div>
+
+							<div class="col-12 col-md-6">
+								<p:commandButton value="Limpiar panel"
+									action="#{administrarUsuarioControlador.limpiarDialogoNuevo()}"
+									update="pnlNuevo" process="@this"
+									styleClass="form-control bg-gradient-success border-success rounded-pill"
+									icon="fa fa-file-o" />
+							</div>
+
+						</div>
+					</p:panel>
+				</div>
+
+				<div class="col-12 col-md-8">
+
+					<p:panel id="pnlUsuario" header="Lista de usuarios">
+						<p:dataTable id="tblUsuario" var="usuario"
+							value="#{administrarUsuarioControlador.listarUsuario}"
+							style="font-size:11px;text-align:center;" paginator="true"
+							rows="10" resizableColumns="true" resizeMode="fit"
+							paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+							rowsPerPageTemplate="10,20,50"
+							currentPageReportTemplate="{totalRecords} en lista">
+
+							<p:column headerText="Id">
+								<h:outputLabel value="#{usuario.idUsuario}" />
+							</p:column>
+
+							<p:column headerText="Nombre">
+								<h:outputLabel value="#{usuario.usNombre}" />
+							</p:column>
+
+							<p:column headerText="Identificación">
+								<h:outputLabel value="#{usuario.usIdentificacion}" />
+							</p:column>
+
+							<p:column style="width:70px;text-align: center">
+								<p:commandButton update="panelGeneral"
+									oncomplete="PF('wdlgModificar').show()" icon="fa fa-search"
+									immediate="true" process="@this" title="Ver Info"
+									actionListener="#{administrarUsuarioControlador.mostrarData(usuario)}"
+									styleClass="btn-sm bg-gradient-success border-success rounded-pill">
+								</p:commandButton>
+							</p:column>
+
+						</p:dataTable>
+
+						<p:dialog id="dlgModificar" widgetVar="wdlgModificar" modal="true"
+							closeOnEscape="true" resizable="false" draggable="true"
+							header="Información de usuario">
+							<p:panel>
+								<div class="form-row">
+									<div class=" form-group col-md-12">
+										<p:outputLabel value="Nombres" for="txtNombre2" />
+										<p:inputText id="txtNombre2" styleClass="form-control"
+											style="height:25px"
+											value="#{administrarUsuarioControlador.usuario.usNombre}"
+											maxlength="100" required="true"
+											requiredMessage="Ingrese nombre" />
+									</div>
+								</div>
+
+								<div class="form-row">
+									<div class=" form-group col-md-12">
+										<p:outputLabel value="Identificación" for="txtIdentificacion2" />
+										<p:inputText id="txtIdentificacion2" styleClass="form-control"
+											style="height:25px"
+											value="#{administrarUsuarioControlador.usuario.usIdentificacion}"
+											maxlength="100" required="true"
+											requiredMessage="Ingrese identificación" />
+									</div>
+								</div>
+
+								<div class="form-row">
+									<div class=" form-group col-md-12">
+										<p:outputLabel value="Usuario" for="txtUsuario2" />
+										<p:inputText id="txtUsuario2" styleClass="form-control"
+											style="height:25px"
+											value="#{administrarUsuarioControlador.usuario.usUsuario}"
+											maxlength="100" required="true"
+											requiredMessage="Ingrese usuario" />
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="col-12">
+										<p:outputLabel value="Rol de usuario" for="txtRol2" />
+									</div>
+
+									<div class="col-12">
+										<p:selectOneMenu id="txtRol2"
+											value="#{administrarUsuarioControlador.usuario.usRol}"
+											required="true" style="width:200px"
+											requiredMessage="Seleccione rol de usuario">
+											<f:selectItem itemLabel="Selecionar rol" />
+											<f:selectItems
+												value="#{administrarUsuarioControlador.listarRoles}"
+												var="rol" itemLabel="#{rol.label}" itemValue="#{rol.value}" />
+										</p:selectOneMenu>
+									</div>
+								</div>
+							</p:panel>
+
+							<div align="center" class="mt-2 row">
+								<div class="col-12 col-md-4">
+									<p:commandButton value="Modificar"
+										actionListener="#{administrarUsuarioControlador.modificarUsuario()}"
+										styleClass="form-control bg-gradient-info border-info rounded-pill"
+										icon="fa fa-edit" update="tblUsuario mensaje"
+										oncomplete="PF('wdlgModificar').hide()"
+										process="@this txtNombre2 txtIdentificacion2 txtUsuario2 txtRol2" />
+								</div>
+
+								<div class="col-12 col-md-4">
+									<p:commandButton value="Eliminar"
+										actionListener="#{administrarUsuarioControlador.eliminarUsuario()}"
+										styleClass="form-control bg-gradient-warning border-warning rounded-pill"
+										icon="fa fa-trash" update="tblUsuario pnlNuevo mensaje"
+										process="@this txtNombre2 txtIdentificacion2 txtUsuario2 txtRol2"
+										oncomplete="PF('wdlgModificar').hide()" />
+								</div>
+
+								<div class="col-12 col-md-4">
+									<p:commandButton value="Cancelar"
+										oncomplete="PF('wdlgModificar').hide()" immediate="true"
+										actionListener="#{administrarUsuarioControlador.eliminarUsuario()}"
+										styleClass="form-control bg-gradient-primary border-primary rounded-pill"
+										icon="fa fa-close" update="pnlNuevo" process="@this" />
+								</div>
+
+							</div>
+						</p:dialog>
+					</p:panel>
+				</div>
+			</div>
+
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>
